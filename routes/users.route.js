@@ -1,5 +1,7 @@
 const { Router } = require('express');
 const { newUser } = require('../controllers/users.controller');
+const finalValidation = require('../middlewares/finalValidation');
+const { email } = require('../validations/users.validations');
 const router = Router();
 
 require('colors');
@@ -16,7 +18,7 @@ router.use( ( request, response, next ) =>{
 
 })
 
-router.post('/', newUser);
+router.post('/',[email, finalValidation] ,newUser);
 
 
 module.exports = router;
