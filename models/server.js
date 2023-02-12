@@ -1,6 +1,7 @@
 const express = require('express');
 const authRoutes = require('../routes/auth.route');
 const cors = require('cors');
+const conexionBaseDeDatos = require('../mongoDB/config');
 require('colors');
 require('dotenv').config();
 
@@ -13,6 +14,7 @@ class Server {
         this.listen();
         this.middlewares();
         this.routes();
+        this.DB();
     }
 
     listen(){
@@ -33,7 +35,14 @@ class Server {
         this.app.use('/api/auth', authRoutes );
     }
 
+    async DB(){
+        await conexionBaseDeDatos();
+    }
+
 
 }
 
 module.exports = Server;
+
+
+
