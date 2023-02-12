@@ -1,5 +1,6 @@
 const express = require('express');
 const authRoutes = require('../routes/auth.route');
+const userRoutes = require('../routes/users.route');
 const cors = require('cors');
 const conexionBaseDeDatos = require('../mongoDB/config');
 require('colors');
@@ -33,6 +34,7 @@ class Server {
 
     routes(){
         this.app.use('/api/auth', authRoutes );
+        this.app.use('/api/users', userRoutes)
     }
 
     async DB(){
